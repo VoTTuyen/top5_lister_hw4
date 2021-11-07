@@ -256,6 +256,7 @@ function GlobalStoreContextProvider(props) {
                 type: GlobalStoreActionType.MARK_LIST_FOR_DELETION,
                 payload: top5List
             });
+
         }
     }
 
@@ -270,6 +271,7 @@ function GlobalStoreContextProvider(props) {
     store.deleteMarkedList = function () {
         store.deleteList(store.listMarkedForDeletion);
     }
+    
 
     store.unmarkListForDeletion = function () {
         storeReducer({
@@ -277,6 +279,7 @@ function GlobalStoreContextProvider(props) {
             payload: null
         });
     }
+    
 
     // THE FOLLOWING 8 FUNCTIONS ARE FOR COORDINATING THE UPDATING
     // OF A LIST, WHICH INCLUDES DEALING WITH THE TRANSACTION STACK. THE
