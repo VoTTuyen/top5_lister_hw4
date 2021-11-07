@@ -55,7 +55,7 @@ function Top5Item(props) {
     }
     function handleKeyPress(event) {
         if (event.code === "Enter") {
-            let index = event.target.id.substring(-1);
+            let index = event.target.id.substring("item-".length);
             let text = event.target.value;
             store.addUpdateItemTransaction(index - 1, text);
             toggleEdit();
