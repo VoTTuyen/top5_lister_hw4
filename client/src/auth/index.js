@@ -41,6 +41,16 @@ function AuthContextProvider(props) {
         }
     };
 
+    auth.logoutUser = async function () {
+        authReducer({
+            type: AuthActionType.GET_LOGGED_IN,
+            payload: {
+                loggedIn: false,
+                user: null
+            }
+        })
+    }
+
     auth.loginUser = async function (payload) {
         try {
             const response = await api.loginUser(payload);
