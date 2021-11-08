@@ -172,7 +172,11 @@ function GlobalStoreContextProvider(props) {
                 response = await api.updateTop5ListById(top5List._id, top5List);
                 if (response.data.success) {
                     async function getListPairs(top5List) {
-                        response = await api.getTop5ListPairs();
+                        const ownerEmail = auth.user.email;
+                        let payload = {
+                            ownerEmail: ownerEmail,
+                        };
+                        response = await api.getTop5ListPairs(payload);
                         if (response.data.success) {
                             let pairsArray = response.data.idNamePairs;
                             storeReducer({

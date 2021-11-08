@@ -49,6 +49,7 @@ function AuthContextProvider(props) {
                 user: null
             }
         })
+        history.push("/");
     }
 
     auth.loginUser = async function (payload) {
