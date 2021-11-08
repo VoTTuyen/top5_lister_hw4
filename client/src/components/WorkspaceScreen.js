@@ -14,18 +14,21 @@ function WorkspaceScreen() {
 
     let editItems = "";
     if (store.currentList) {
-        editItems = 
-            <List id="edit-items" sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                {
-                    store.currentList.items.map((item, index) => (
-                        <Top5Item 
-                            keyCallback={'top5-item-' + (index+1)}
-                            text={item}
-                            index={index} 
-                        />
-                    ))
-                }
-            </List>;
+        editItems = (
+            <List
+                id="edit-items"
+                sx={{ width: "100%", bgcolor: "background.paper" }}
+            >
+                {store.currentList.items.map((item, index) => (
+                    <Top5Item
+                        key={"top5-item-" + (index + 1)}
+                        keyCallback={"top5-item-" + (index + 1)}
+                        text={item}
+                        index={index}
+                    />
+                ))}
+            </List>
+        );
     }
     return (
         <div id="top5-workspace">

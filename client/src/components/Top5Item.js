@@ -128,7 +128,7 @@ function Top5Item(props) {
                 onDrop={(event) => {
                     handleDrop(event, index + 1);
                 }}
-                draggable="true"
+                draggable={!store.isItemEditActive}
                 sx={{ display: "flex", p: 1 }}
                 style={{
                     fontSize: "48pt",

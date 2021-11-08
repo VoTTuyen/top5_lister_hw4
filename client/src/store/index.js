@@ -381,6 +381,10 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
+    store.clearAllTransactions = function () {
+        tps.clearAllTransactions();
+    }
+
     return (
         <GlobalStoreContext.Provider value={{
             store

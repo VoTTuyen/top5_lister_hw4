@@ -29,13 +29,15 @@ function EditToolbar() {
     }  
     return (
         <div id="edit-toolbar">
-            <Button 
+            <Button
+                disabled={editStatus || !store.canUndo()}
                 id='undo-button'
                 onClick={handleUndo}
                 variant="contained">
                     <UndoIcon />
             </Button>
-            <Button 
+            <Button
+                disabled={editStatus || !store.canRedo()}
                 id='redo-button'
                 onClick={handleRedo}
                 variant="contained">
