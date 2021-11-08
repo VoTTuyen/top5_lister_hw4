@@ -11,9 +11,14 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Copyright from "./Copyright";
 import AuthContext from "../auth";
+import ErrorModal from "./ErrorModal";
+import { useState, useContext } from "react";
+
 
 export default function SignInSide() {
     const { auth } = React.useContext(AuthContext);
+     const [showAlert, setShowAlert] = useState(false);
+     const [errorMessage, setErrorMessage] = useState("");
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -23,13 +28,23 @@ export default function SignInSide() {
         };
         console.log(payload);
         auth.loginUser(payload).then(message => {
+             if (message !== "") {
+                 setErrorMessage(message);
+                 setShowAlert(true);
+             }
             console.log("message=" + message);
         })
     };
 
     return (
         <Grid container component="main" sx={{ height: "50vh" }}>
-            <CssBaseline/>
+            <ErrorModal
+                showAlert={showAlert}
+                setShowAlertCallback={setShowAlert}
+                errorMessage={errorMessage}
+            />
+
+            <CssBaseline />
             <Grid
                 item
                 xs={false}
@@ -45,7 +60,6 @@ export default function SignInSide() {
                             : t.palette.grey[900],
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    
                 }}
             />
             <Grid

@@ -27,5 +27,4 @@ export {
     Statusbar, 
     Top5Item, 
     WorkspaceScreen,
-    // DeleteDialog
 }
