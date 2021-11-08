@@ -2,6 +2,30 @@ const auth = require('../auth')
 const User = require('../models/user-model')
 const bcrypt = require('bcryptjs')
 
+loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            res.status(400).json({ errorMessage: "Please enter all required fields" });
+        } else {
+            console.log('attempting to login: ' + email)
+            const user = await User.findOne({ email: email });
+            console.log('email=' + user.email);
+            let flag = await bcrypt.compare(password, user.passwordHash)
+            console.log('flag=' + flag)
+            if (flag) {
+                res.status(200).json({
+                    user: user
+                })
+            } else {
+                res.status(400).json({ errorMessage: "Invalid password!" })
+            }
+        }
+    } catch (error) {
+        res.status(500).json({errorMessage: "Error!"}).send();
+    }
+}
+
 getLoggedIn = async (req, res) => {
     auth.verify(req, res, async function () {
         const loggedInUser = await User.findOne({ _id: req.userId });
@@ -12,7 +36,7 @@ getLoggedIn = async (req, res) => {
                 lastName: loggedInUser.lastName,
                 email: loggedInUser.email
             }
-        }).send();
+        }).send().catch(err => console.log(err));
     })
 }
 
@@ -79,6 +103,7 @@ registerUser = async (req, res) => {
 }
 
 module.exports = {
+    loginUser,
     getLoggedIn,
     registerUser
 }

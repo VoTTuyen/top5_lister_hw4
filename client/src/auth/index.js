@@ -42,6 +42,25 @@ function AuthContextProvider(props) {
         }
     }
 
+    auth.loginUser = async function (payload) {
+        try {
+            const response = await api.loginUser(payload);
+            if (response.status === 200) {
+                authReducer({
+                    type: AuthActionType.GET_LOGGED_IN,
+                    payload: {
+                        loggedIn: true,
+                        user: response.data.user,
+                    },
+                });
+                history.push("/");
+            }
+            return "";
+        } catch (error) {
+            return error.response.data.errorMessage;
+        }
+    }
+
     auth.getLoggedIn = async function () {
         const response = await api.getLoggedIn();
         if (response.status === 200) {
