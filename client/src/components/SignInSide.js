@@ -35,7 +35,6 @@ export default function SignInSide() {
             console.log("message=" + message);
         })
     };
-
     return (
         <Grid container component="main" sx={{ height: "50vh" }}>
             <ErrorModal
@@ -43,7 +42,6 @@ export default function SignInSide() {
                 setShowAlertCallback={setShowAlert}
                 errorMessage={errorMessage}
             />
-
             <CssBaseline />
             <Grid
                 item
